@@ -79,17 +79,25 @@ posts.forEach((signlePost) => {
 const allLikeBtn = document.querySelectorAll(`.js-like-button`);
 const allLikeCounter = document.querySelectorAll(`.js-likes-counter`)
 //per ogni bottone, creo un evento di ascolto e gli aggiungo la classe like-button--liked al click
+const likedPostId = []
+console.log(likedPostId)
 allLikeBtn.forEach((singleDOMBtn, index) => {
     singleDOMBtn.addEventListener(`click`, function() {
         singleDOMBtn.classList.add(`like-button--liked`);
         //seleziono il counter del singolo post
         
-        // let postId = this.dataset.postid
+        let postId = this.dataset.postid
         // const connectedCounter = document.querySelector(`#like-counter-` + postId)
         // console.log(connectedCounter)
-        //prendo 
+        //creo una variabile in cui salvo un indice dell'array allLikeCounter che corrisponde al counter di ogni post
         const connectedCounter = allLikeCounter[index]
+        //incremento la variabile di uno ogni volta che clicco
         connectedCounter.innerHTML ++
+        
+        if(!likedPostId.includes(postId)){
+            likedPostId.push(postId) 
+        }
+
     })
 })
 
