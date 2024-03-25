@@ -1,8 +1,7 @@
 // Descrizione:
 // Ricreiamo un feed social aggiungendo al layout di base fornito, il nostro script JS in cui:
-// Milestone 1 - Prendendo come riferimento il layout di esempio presente nell'html, stampiamo i post del nostro feed.
-// Milestone 2 - Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
-// Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+
+
 
 
 const posts = [
@@ -62,8 +61,7 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
-
-console.log(posts[0])
+// Milestone 1 - Prendendo come riferimento il layout di esempio presente nell'html, stampiamo i post del nostro feed.
 //seleziono il container in cui stampare i post nel DOM
 const postContainer = document.querySelector(`#container`);
 //stampo dinamicamente ogni oggetto contenuto nell'array posts
@@ -73,6 +71,17 @@ posts.forEach((signlePost) => {
 
 })
 
+// Milestone 2
+//Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
+//Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+
+//slezionare e mettere in ascolto tutti i tasti mi piace
+let likeBtn = document.querySelectorAll(`.js-like-button`);
+console.log(likeBtn)
+
+
+
+
 
 //---------------
 //   FUNCTIONS
@@ -81,19 +90,13 @@ posts.forEach((signlePost) => {
 function generateSinglePost(uniquePost) {
     //destrutturo l'array posts e salvo il contenuto delle chiavi in varibili
     let {id, content, media, author, likes, created} = uniquePost;
-    console.log(id)
-    console.log(content)
-    console.log(media)
-    console.log(author)
-    console.log(likes)
-    console.log(created)
     //salvo in una variabile il codice che voglio stampare per ogni post e sostituisco alcune parti con le varibili
     let generatedPost = `
     <div class="post">
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src="${media}" alt="${author.name}">                    
+                    <img class="profile-pic" src="${author.image} " alt="${author.name}">                    
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${author.name}</div>
@@ -103,7 +106,7 @@ function generateSinglePost(uniquePost) {
         </div>
         <div class="post__text">${content}.</div>
         <div class="post__image">
-            <img src="${author.image}" alt="">
+            <img src="${media}" alt="">
         </div>
         <div class="post__footer">
             <div class="likes js-likes">
