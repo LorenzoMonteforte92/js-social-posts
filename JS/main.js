@@ -75,9 +75,15 @@ posts.forEach((signlePost) => {
 //Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
 //Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
 
-//slezionare e mettere in ascolto tutti i tasti mi piace
-let likeBtn = document.querySelectorAll(`.js-like-button`);
-console.log(likeBtn)
+//slezionare tutti i tasti mi piace
+const likeBtn = document.querySelectorAll(`.js-like-button`);
+const likeCounter = document.querySelectorAll(`.js-likes-counter`)
+//per ogni bottone, creo un evento di ascolto e gli aggiungo la classe like-button--liked al click
+likeBtn.forEach((singleBtn) => {
+    this.addEventListener(`click`, function() {
+        singleBtn.classList.add(`like-button--liked`);
+    })
+})
 
 
 
@@ -90,6 +96,7 @@ console.log(likeBtn)
 function generateSinglePost(uniquePost) {
     //destrutturo l'array posts e salvo il contenuto delle chiavi in varibili
     let {id, content, media, author, likes, created} = uniquePost;
+    console.log(likes)
     //salvo in una variabile il codice che voglio stampare per ogni post e sostituisco alcune parti con le varibili
     let generatedPost = `
     <div class="post">
@@ -125,3 +132,4 @@ function generateSinglePost(uniquePost) {
     `
     return generatedPost
 }
+
