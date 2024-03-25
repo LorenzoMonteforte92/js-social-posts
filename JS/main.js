@@ -83,30 +83,38 @@ const likedPostId = []
 console.log(likedPostId)
 allLikeBtn.forEach((singleDOMBtn, index) => {
     singleDOMBtn.addEventListener(`click`, function() {
-        singleDOMBtn.classList.add(`like-button--liked`);
-        //seleziono il counter del singolo post
         
+        //seleziono il counter del singolo post
         let postId = this.dataset.postid
         // const connectedCounter = document.querySelector(`#like-counter-` + postId)
         // console.log(connectedCounter)
         //creo una variabile in cui salvo un indice dell'array allLikeCounter che corrisponde al counter di ogni post
         const connectedCounter = allLikeCounter[index]
         //incremento la variabile di uno ogni volta che clicco
-        connectedCounter.innerHTML ++
         
+        if(!singleDOMBtn.classList.contains(`like-button--liked`)){
+            singleDOMBtn.classList.add(`like-button--liked`);
+            connectedCounter.innerHTML ++
+        } else if(singleDOMBtn.classList.contains(`like-button--liked`)){
+            singleDOMBtn.classList.remove(`like-button--liked`)
+            connectedCounter.innerHTML --
+        }
+        
+       
         if(!likedPostId.includes(postId)){
             likedPostId.push(postId) 
         }
 
     })
 })
+// 3. Al click su un pulsante "Mi Piace" di un post, se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
 
 
 // 2. Gestire l'assenza dell'immagine profilo con un elemento di fallback che contiene le iniziali dell'utente (es. Luca Formicola > LF).
 //mi servono le iniziali dell'utente, da stampare nel DOM all'interno del div contenitore immagine se il valore image di author è null
 
 
-// 3. Al click su un pulsante "Mi Piace" di un post, se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
+
 
 
 
