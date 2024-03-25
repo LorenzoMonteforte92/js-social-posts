@@ -9,7 +9,7 @@ const posts = [
     {
         "id": 1,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
-        "media": "https://unsplash.it/600/300?image=171",
+        "media": "https://unsplash.it/600/400?image=171",
         "author": {
             "name": "Phil Mangione",
             "image": "https://unsplash.it/300/300?image=15"
@@ -63,8 +63,62 @@ const posts = [
     }
 ];
 
+console.log(posts[0])
+//seleziono il container in cui stampare i post nel DOM
+const postContainer = document.querySelector(`#container`);
+//stampo dinamicamente ogni oggetto contenuto nell'array posts
+posts.forEach((signlePost) => {
+  let postsTemplate = generateSinglePost(signlePost);
+  postContainer.innerHTML += postsTemplate;
+
+})
 
 
 //---------------
 //   FUNCTIONS
 //---------------
+
+function generateSinglePost(uniquePost) {
+    //destrutturo l'array posts e salvo il contenuto delle chiavi in varibili
+    let {id, content, media, author, likes, created} = uniquePost;
+    console.log(id)
+    console.log(content)
+    console.log(media)
+    console.log(author)
+    console.log(likes)
+    console.log(created)
+    //salvo in una variabile il codice che voglio stampare per ogni post e sostituisco alcune parti con le varibili
+    let generatedPost = `
+    <div class="post">
+        <div class="post__header">
+            <div class="post-meta">                    
+                <div class="post-meta__icon">
+                    <img class="profile-pic" src="${media}" alt="${author.name}">                    
+                </div>
+                <div class="post-meta__data">
+                    <div class="post-meta__author">${author.name}</div>
+                    <div class="post-meta__time">${created}</div>
+                </div>                    
+            </div>
+        </div>
+        <div class="post__text">${content}.</div>
+        <div class="post__image">
+            <img src="${author.image}" alt="">
+        </div>
+        <div class="post__footer">
+            <div class="likes js-likes">
+                <div class="likes__cta">
+                    <a class="like-button  js-like-button" href="#" data-postid="${id}">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                    </a>
+                </div>
+                <div class="likes__counter">
+                    Piace a <b id="like-counter-${id}" class="js-likes-counter">${likes}</b> persone
+                </div>
+            </div> 
+        </div>            
+    </div>
+    `
+    return generatedPost
+}
