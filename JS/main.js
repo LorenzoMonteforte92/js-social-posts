@@ -32,7 +32,7 @@ const posts = [
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=234",
         "author": {
-            "name": "Chiara Passaro",
+            "name": "chiara Passaro",
             "image": "https://unsplash.it/300/300?image=20"
         },
         "likes": 78,
@@ -102,6 +102,13 @@ allLikeBtn.forEach((singleDOMBtn, index) => {
 })
 
 
+// 2. Gestire l'assenza dell'immagine profilo con un elemento di fallback che contiene le iniziali dell'utente (es. Luca Formicola > LF).
+//mi servono le iniziali dell'utente, da stampare nel DOM all'interno del div contenitore immagine se il valore image di author è null
+
+
+// 3. Al click su un pulsante "Mi Piace" di un post, se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
+
+
 
 
 
@@ -111,19 +118,34 @@ allLikeBtn.forEach((singleDOMBtn, index) => {
 
 function generateSinglePost(uniquePost) {
     //destrutturo l'array posts e salvo il contenuto delle chiavi in varibili
-    let {id, content, media, author, likes, created} = uniquePost;
-    console.log(likes)
+    let {id, content, media, author, likes, created}= uniquePost;
+    let {image} = author
+    // 1. Formattare le date in formato italiano (gg/mm/aaaa)
+    //separo la data in un array, giro l'array e lo unisco separato da /
+    let italianDate = created.split(`-`).reverse().join(`/`);
     //salvo in una variabile il codice che voglio stampare per ogni post e sostituisco alcune parti con le varibili
+    let userInitials = getUserInitials(author)
+    console.log(image)
+
+    let defaultPic
+
+    if(image){
+        defaultPic = `<img class="profile-pic" src="${image} " alt="${name}"></img>`
+    } else {
+        defaultPic = `${userInitials}`
+    }
+   
+    
     let generatedPost = `
     <div class="post">
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src="${author.image} " alt="${author.name}">                    
+                    ${defaultPic}                    
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${author.name}</div>
-                    <div class="post-meta__time">${created}</div>
+                    <div class="post-meta__time">${italianDate}</div>
                 </div>                    
             </div>
         </div>
@@ -149,3 +171,22 @@ function generateSinglePost(uniquePost) {
     return generatedPost
 }
 
+//funzione che trasforma una stringa in due array con nome e cognome ne prende le iniziali e le salva in una variabile in uppercase
+function getUserInitials(arrayName){
+    let authorNameArray = arrayName.name.split(` `)
+    let [name, surname] = authorNameArray
+    let initials = name[0] + surname[0]
+    return initials.toUpperCase()
+} 
+
+//funzione che stampa nel DOM le iniziali dell'utente se non è disponibile l'immagine di profilo
+// function getDefaultProfilePic (image){
+//     let defaultPic
+    
+    
+
+//     return defaultPic
+
+
+// }
+{/* <img class="profile-pic" src="${author.image} " alt="${author.name}"></img> */}
