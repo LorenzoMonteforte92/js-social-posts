@@ -76,12 +76,20 @@ posts.forEach((signlePost) => {
 //Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
 
 //slezionare tutti i tasti mi piace
-const likeBtn = document.querySelectorAll(`.js-like-button`);
-const likeCounter = document.querySelectorAll(`.js-likes-counter`)
+const allLikeBtn = document.querySelectorAll(`.js-like-button`);
+const allLikeCounter = document.querySelectorAll(`.js-likes-counter`)
 //per ogni bottone, creo un evento di ascolto e gli aggiungo la classe like-button--liked al click
-likeBtn.forEach((singleBtn) => {
-    this.addEventListener(`click`, function() {
-        singleBtn.classList.add(`like-button--liked`);
+allLikeBtn.forEach((singleDOMBtn, index) => {
+    singleDOMBtn.addEventListener(`click`, function() {
+        singleDOMBtn.classList.add(`like-button--liked`);
+        //seleziono il counter del singolo post
+        
+        // let postId = this.dataset.postid
+        // const connectedCounter = document.querySelector(`#like-counter-` + postId)
+        // console.log(connectedCounter)
+        //prendo 
+        const connectedCounter = allLikeCounter[index]
+        connectedCounter.innerHTML ++
     })
 })
 
