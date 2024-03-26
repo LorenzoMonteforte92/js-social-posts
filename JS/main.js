@@ -82,8 +82,9 @@ const allLikeCounter = document.querySelectorAll(`.js-likes-counter`)
 const likedPostId = []
 console.log(likedPostId)
 allLikeBtn.forEach((singleDOMBtn, index) => {
-    singleDOMBtn.addEventListener(`click`, function() {
-        
+    singleDOMBtn.addEventListener(`click`, function(event) {
+        //dire al browser che scelgo io che cosa deve succedere dopo l'evento e il browser non torna più a inizio pagina dopo il click
+        event.preventDefault()
         //seleziono il counter del singolo post
         let postId = this.dataset.postid
         // const connectedCounter = document.querySelector(`#like-counter-` + postId)
