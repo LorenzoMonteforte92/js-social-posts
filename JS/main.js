@@ -86,7 +86,8 @@ allLikeBtn.forEach((singleDOMBtn, index) => {
         //dire al browser che scelgo io che cosa deve succedere dopo l'evento e il browser non torna più a inizio pagina dopo il click
         event.preventDefault()
         //seleziono il counter del singolo post
-        let postId = this.dataset.postid
+        let postId = parseInt(this.dataset.postid)
+        
         // const connectedCounter = document.querySelector(`#like-counter-` + postId)
         // console.log(connectedCounter)
         //creo una variabile in cui salvo un indice dell'array allLikeCounter che corrisponde al counter di ogni post
@@ -105,7 +106,7 @@ allLikeBtn.forEach((singleDOMBtn, index) => {
         if(!likedPostId.includes(postId)){
             likedPostId.push(postId) 
         }
-
+        console.log(likedPostId)
     })
 })
 // 3. Al click su un pulsante "Mi Piace" di un post, se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
@@ -131,7 +132,7 @@ function generateSinglePost(uniquePost) {
     let {image} = author
     // 1. Formattare le date in formato italiano (gg/mm/aaaa)
     //separo la data in un array, giro l'array e lo unisco separato da /
-    let italianDate = created.split(`-`).reverse().join(`/`);
+    
     //salvo in una variabile il codice che voglio stampare per ogni post e sostituisco alcune parti con le varibili
     let userInitials = getUserInitials(author)
     console.log(image)
@@ -154,7 +155,7 @@ function generateSinglePost(uniquePost) {
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${author.name}</div>
-                    <div class="post-meta__time">${italianDate}</div>
+                    <div class="post-meta__time">${convertDate (created)}</div>
                 </div>                    
             </div>
         </div>
@@ -188,14 +189,8 @@ function getUserInitials(arrayName){
     return initials.toUpperCase()
 } 
 
-//funzione che stampa nel DOM le iniziali dell'utente se non è disponibile l'immagine di profilo
-// function getDefaultProfilePic (image){
-//     let defaultPic
-    
-    
-
-//     return defaultPic
-
-
-// }
-{/* <img class="profile-pic" src="${author.image} " alt="${author.name}"></img> */}
+function convertDate (arrayKey){
+    //si puo anche destrutturare l'array e salvare la data in ordine giusto in una variabile con template literal
+    let italianDate = arrayKey.split(`-`).reverse().join(`/`);
+    return italianDate
+}
