@@ -32,7 +32,7 @@ const posts = [
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=234",
         "author": {
-            "name": "chiara Passaro",
+            "name": "Chiara Passaro",
             "image": "https://unsplash.it/300/300?image=20"
         },
         "likes": 78,
@@ -140,19 +140,19 @@ function generateSinglePost(uniquePost) {
     let defaultPic
 
     if(image){
-        defaultPic = `<img class="profile-pic" src="${image} " alt="${name}"></img>`
+        defaultPic = `<div class="post-meta__icon">
+            <img class="profile-pic" src="${image} " alt="${name}"></img>               
+        </div>`
     } else {
         defaultPic = `${userInitials}`
     }
-   
+    
     
     let generatedPost = `
     <div class="post">
         <div class="post__header">
             <div class="post-meta">                    
-                <div class="post-meta__icon">
-                    ${defaultPic}                    
-                </div>
+                ${defaultPic}
                 <div class="post-meta__data">
                     <div class="post-meta__author">${author.name}</div>
                     <div class="post-meta__time">${convertDate (created)}</div>
@@ -185,8 +185,10 @@ function generateSinglePost(uniquePost) {
 function getUserInitials(arrayName){
     let authorNameArray = arrayName.name.split(` `)
     let [name, surname] = authorNameArray
-    let initials = name[0] + surname[0]
-    return initials.toUpperCase()
+    let initials = `<div class="profile-pic-default">
+                        <span>${name[0]}${surname[0]}</span>
+                    </div>`
+    return initials
 } 
 
 function convertDate (arrayKey){
