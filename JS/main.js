@@ -140,9 +140,8 @@ function generateSinglePost(uniquePost) {
     let defaultPic
 
     if(image){
-        defaultPic = `<div class="post-meta__icon">
-            <img class="profile-pic" src="${image} " alt="${name}"></img>               
-        </div>`
+        defaultPic = `
+            <img class="profile-pic" src="${image} " alt="${name}"></img>`
     } else {
         defaultPic = `${userInitials}`
     }
@@ -151,8 +150,10 @@ function generateSinglePost(uniquePost) {
     let generatedPost = `
     <div class="post">
         <div class="post__header">
-            <div class="post-meta">                    
-                ${defaultPic}
+            <div class="post-meta">
+                <div class="post-meta__icon">
+                ${defaultPic}            
+                </div>                    
                 <div class="post-meta__data">
                     <div class="post-meta__author">${author.name}</div>
                     <div class="post-meta__time">${convertDate (created)}</div>
